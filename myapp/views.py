@@ -11,3 +11,10 @@ def product_list(request):
     context = dict(products=product)
 
     return render(request, 'product_list.html', context)
+
+
+def product_detail(request, id):
+    product = Product.objects.get(id=id)
+    context = dict(product=product)
+
+    return render(request, 'product_detail.html', context)
