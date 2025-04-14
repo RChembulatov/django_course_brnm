@@ -1,0 +1,1 @@
+[{"model": "myapp.country", "pk": 1, "fields": {"country_name": "Italy"}}, {"model": "myapp.country", "pk": 2, "fields": {"country_name": "France"}}]
