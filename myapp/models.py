@@ -16,3 +16,42 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}-{self.price}-{self.stock}"
+
+
+class Sport(models.Model):
+    name = models.CharField("Название спорта", max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Country(models.Model):
+    country_name = models.CharField("Название страны", max_length=100)
+
+    def __str__(self):
+        return self.country_name
+
+
+class City(models.Model):
+    city_name = models.CharField("Название города", max_length=100)
+    street_name = models.CharField("Название улицы", max_length=100)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.city_name
+
+
+class Author(models.Model):
+    name = models.CharField("Название автора", max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class Book(models.Model):
+    title = models.CharField("Название книги", max_length=200)
+    description = models.CharField("Описание книги", max_length=200)
+    authors = models.ManyToManyField(Author)
+
+    def __str__(self):
+        return self.title
