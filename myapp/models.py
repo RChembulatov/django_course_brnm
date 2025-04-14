@@ -16,3 +16,10 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.name}-{self.price}-{self.stock}"
+
+
+class Sport(models.Model):
+    name = models.CharField("Название спорта", max_length=100)
+
+    def __str__(self):
+        return self.name
