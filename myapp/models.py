@@ -39,3 +39,19 @@ class City(models.Model):
 
     def __str__(self):
         return self.city_name
+
+
+class Author(models.Model):
+    name = models.CharField("Название автора", max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class Book(models.Model):
+    title = models.CharField("Название книги", max_length=200)
+    description = models.CharField("Описание книги", max_length=200)
+    authors = models.ManyToManyField(Author)
+
+    def __str__(self):
+        return self.title

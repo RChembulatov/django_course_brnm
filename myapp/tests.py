@@ -1,6 +1,6 @@
 from django.test import TestCase
-from .models import Sport, Country, City
-from .factories import CountryFactory, CityFactory
+from .models import Sport, Country, City, Book
+from .factories import CountryFactory, CityFactory, AuthorFactory, BookFactory
 
 
 class SportModelTest(TestCase):
@@ -37,3 +37,26 @@ class CityFactoryTest(TestCase):
         self.assertEqual(city.street_name, "Via del Corso")
         self.assertEqual(city.country.country_name, "Italy")
         self.assertIsInstance(city.country, Country)
+
+
+class AuthorAndBookModelTest(TestCase):
+    def test_author_and_book_creation(self):
+        author = AuthorFactory(name="Толстой")
+        book = BookFactory(title="Война и мир", description="Описание")
+
+        self.assertEqual(author.name, "Толстой")
+        self.assertEqual(book.title, "Война и мир")
+        self.assertEqual(book.description, "Описание")
+
+    def test_author_books_relationship(self):
+        author = AuthorFactory(name="Достоевский")
+        book1 = BookFactory(title="Преступление и наказание", authors=[author])
+        book2 = BookFactory(title="Идиот", authors=[author])
+
+        # Проверка, что 2 книги
+        self.assertEqual(author.book_set.count(), 2)
+        self.assertEqual(Book.objects.filter(authors=author).count(), 2)
+
+        # Есть книги 1 и 2 у автора
+        self.assertEqual(book1.authors.first().name, "Достоевский")
+        self.assertEqual(book2.authors.first().name, "Достоевский")
