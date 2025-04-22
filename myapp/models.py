@@ -55,3 +55,11 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Item(models.Model):
+    name = models.CharField("Название для пагинации", max_length=100)
+    description = models.CharField("Описание для пагинации", max_length=200)
+
+    def __str__(self):
+        return self.name

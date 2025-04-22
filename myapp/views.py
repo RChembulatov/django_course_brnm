@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from myapp.models import Product
+from myapp.models import Product, Item
+from django.views.generic import ListView
 
 
 def home(request):
@@ -18,3 +19,10 @@ def product_detail(request, id):
     context = dict(product=product)
 
     return render(request, 'product_detail.html', context)
+
+
+class ItemListView(ListView):
+    model = Item
+    template_name = 'item_list_with_pagination.html'
+    context_object_name = 'item_list'
+    paginate_by = 5
