@@ -1,6 +1,9 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from myapp.forms import ContactForm
 from myapp.models import Product, Item
 from django.views.generic import ListView
+from django.views.generic.edit import FormView
 
 
 def home(request):
@@ -26,3 +29,18 @@ class ItemListView(ListView):
     template_name = 'item_list_with_pagination.html'
     context_object_name = 'item_list'
     paginate_by = 5
+
+
+def contact_form_success_view(request):
+    return render(request, 'contact_form_success.html')
+
+
+class ContactView(FormView):
+    template_name = 'contact_form.html'
+    form_class = ContactForm
+    success_url = reverse_lazy('contact_form_success')
+
+    def form_valid(self, form):
+        form.save()
+
+        return super().form_valid(form)
