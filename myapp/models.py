@@ -18,6 +18,16 @@ class Product(models.Model):
         return f"{self.name}-{self.price}-{self.stock}"
 
 
+class Review(models.Model):
+    author = models.CharField("Автор", max_length=100)
+    text = models.TextField("Текст отзыва")
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.author}-{self.product}"
+
+
 class Sport(models.Model):
     name = models.CharField("Название спорта", max_length=100)
 
@@ -55,3 +65,21 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Item(models.Model):
+    name = models.CharField("Название для пагинации", max_length=100)
+    description = models.CharField("Описание для пагинации", max_length=200)
+
+    def __str__(self):
+        return self.name
+
+
+class Contact(models.Model):
+    name = models.CharField('Имя', max_length=100)
+    email = models.EmailField('Email')
+    message = models.TextField('Сообщение')
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.name}-{self.email}'

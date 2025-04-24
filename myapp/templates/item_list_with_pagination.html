@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block title %}Пагинация{% endblock %} 
+{% block main %}
+<div class="container">
+  <h1>Пагинация</h1>
+  <ul>
+    {% for item in item_list %}
+    <li>{{ item.name }} - {{ item.description }}</li>
+    {% endfor %}
+  </ul>
+  {% include 'pagination.html' %}
+  <div class="mt-2">
+    Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+  </div>
+</div>
+{% endblock %}
