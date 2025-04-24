@@ -18,6 +18,16 @@ class Product(models.Model):
         return f"{self.name}-{self.price}-{self.stock}"
 
 
+class Review(models.Model):
+    author = models.CharField("Автор", max_length=100)
+    text = models.TextField("Текст отзыва")
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.author}-{self.product}"
+
+
 class Sport(models.Model):
     name = models.CharField("Название спорта", max_length=100)
 
