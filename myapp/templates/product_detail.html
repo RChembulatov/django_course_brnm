@@ -1,35 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Детальная информация по {{ product.name }}</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-      crossorigin="anonymous"
-    />
-  </head>
-  <body>
-    <main>
-      <div class="container">
-        <h1>Детальная информация по {{ product.name }}</h1>
-        <p class="text-start">Название продукта: {{ product.name }}</p>
-        <p class="text-start">Цена продукта: {{ product.price }} руб.</p>
-        <p class="text-start">Категория продукта: {{product.category.name}}</p>
-        <p class="text-start">
-          <span>Остаток: </span>
-          {% if product.stock %}
-          <span>{{ product.stock }} шт.</span>
-          {% else %}
-          <span>Нет в наличии</span>
-          {% endif %}
-        </p>
-        <a href="{% url 'product_list' %}" class="btn btn-secondary">
-          Назад к списку продуктов
-        </a>
-      </div>
-    </main>
-  </body>
-</html>
+{% extends 'base.html' %} 
+{% block title %}Детальная информация по {{ product.name }}{% endblock %} 
+{% block main %}
+<div class="container">
+  <h1>Детальная информация по {{ product.name }}</h1>
+  <p class="text-start">Название продукта: {{ product.name }}</p>
+  <p class="text-start">Цена продукта: {{ product.price }} руб.</p>
+  <p class="text-start">Категория продукта: {{product.category.name}}</p>
+  <p class="text-start">
+    <span>Остаток: </span>
+    {% if product.stock %}
+    <span>{{ product.stock }} шт.</span>
+    {% else %}
+    <span>Нет в наличии</span>
+    {% endif %}
+  </p>
+  <a href="{% url 'product_list' %}" class="btn btn-secondary">
+    Назад к списку продуктов
+  </a>
+</div>
+{% endblock %}
